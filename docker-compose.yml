@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  web:
+    build: ./services/web
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
+    command: python ./manage.py run -h 0.0.0.0
