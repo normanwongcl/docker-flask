@@ -14,7 +14,8 @@ ENV PYTHONUNBUFFERED 1
 
 # install system dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc
+    apt-get install -y --no-install-recommends \
+    gcc 
 
 # lint
 RUN pip3 install --upgrade pip
@@ -24,6 +25,7 @@ RUN flake8 --ignore=E501,F401 .
 
 # install python dependencies
 COPY ./requirements.txt .
+COPY /requirements/ /usr/src/app/requirements/
 RUN pip3 wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 
@@ -37,8 +39,9 @@ FROM python:3.8.3-slim-buster
 # create directory for the app user
 RUN mkdir -p /home/app
 
-# create the app user
-RUN addgroup -S app && adduser -S app -G app
+# create the app user, give it sudo powers
+RUN adduser --gecos "" app
+RUN usermod -aG sudo app 
 
 # create the appropriate directories
 ENV HOME=/home/app
@@ -50,6 +53,7 @@ WORKDIR $APP_HOME
 RUN apt-get update && apt-get install -y --no-install-recommends netcat
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
+COPY --from=builder /usr/src/app/requirements/ .
 RUN pip3 install --upgrade pip
 RUN pip3 install --no-cache /wheels/*
 
