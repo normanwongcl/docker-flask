@@ -1,9 +1,9 @@
 from flask.cli import FlaskGroup
-
-from project import app, db,User
+from project import app, db, User
 
 
 cli = FlaskGroup(app)
+
 
 # registers a new command, create_db, to the CLI so that we can run it from the command line
 @cli.command("create_db")
@@ -17,6 +17,7 @@ def create_db():
 def seed_db():
     db.session.add(User(email="nich19032@outlook.com"))
     db.session.commit()
+
 
 if __name__ == "__main__":
     cli()
