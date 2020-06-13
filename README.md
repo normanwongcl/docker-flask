@@ -39,6 +39,3 @@ docker-compose exec web python -m pytest "project/tests" -p no:warnings --cov="p
 ```
 
 Code Reference used: <https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/>
-
-docker-compose exec web /bin/sh -c "isort project/**/\*.py --check-only"
-docker-compose exec users /bin/sh -c "isort project/**/\*.py --diff"
