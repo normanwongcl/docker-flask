@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y netcat
 RUN pip3 install --upgrade pip
 COPY ./requirements.txt /usr/src/app/requirements.txt
 COPY /requirements/ /usr/src/app/requirements/
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements/dev.txt
 
 # copy project
 COPY . /usr/src/app/
