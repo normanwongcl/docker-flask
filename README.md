@@ -1,4 +1,8 @@
+![Codebuild CI](https://codebuild.ap-southeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiQThZQy9jNkdDdGlwaUJaK3BPR3p1WHBKS0VqRGJHby9WTFExS3ZSdzVwZkNWNEVxaWlOMWE0aWR5dERPWnhnUTNEMC9rU0pxZDBXU0dzT3NhVUR3ampvPSIsIml2UGFyYW1ldGVyU3BlYyI6Ii9qOHZjSGwxaUNGLytDSUMiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+
 # Dockerizing flask, postgres, nginx
+
+Teaching myself how work with flask project.
 
 ## Prerequisite
 
@@ -18,7 +22,7 @@
 docker-compose up -d --build
 ```
 
-## To run this porject in venv
+## To run this project in venv
 
 ```bash
 # Build venv
