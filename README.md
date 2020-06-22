@@ -2,7 +2,7 @@
 
 # Dockerizing flask, postgres, nginx
 
-Teaching myself how work with flask project.
+Teaching myself how to work with flask project.
 
 ## Prerequisite
 
