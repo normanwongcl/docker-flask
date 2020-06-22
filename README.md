@@ -14,22 +14,49 @@
 
 ## To run this project in docker
 
-```docker
+```bash
 docker-compose up -d --build
+```
+
+## To run this porject in venv
+
+```bash
+# Build venv
+python3.8 -m venv env
+
+# Run venv
+source env/bin/activate
 ```
 
 ## Run linter
 
-```docker
+```bash
+# For docker workflow
+
 # Perform a dry-run of black to check what files will be formatted
 docker-compose exec web black project --check
 
 # Run black to format the python code
 docker-compose exec web black project
 
-# Run flake8 to check if python styling is enforced
-docker-compose exec web flake8 project
+# Run isort to sort import library
+docker-compose exec -T web /bin/sh -c "isort project/*/*.py --check-only"
 
+# Run flake8 to check if python styling is enforced
+docker-compose exec web flake8 --ignore=E501,F401 project
+```
+
+```bash
+# For venv workflow
+
+# Run black to format the python code
+black services/web/project
+
+# Run isort to sort import library
+isort services/*/*/*.py
+
+# Run flake8 to check if python styling is enforced
+flake8 --ignore=E501,F401 services/web/project
 ```
 
 ## Run the tests with coverage (without outputting warnings)

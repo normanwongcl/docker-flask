@@ -1,0 +1,43 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "ap-southeast-2"
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  pre_build:
+    commands:
+      - echo logging in to ecr...
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:builder || true
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod || true
+  build:
+    commands:
+      - echo building and testing dev images...
+      - docker-compose up -d --build
+      - docker-compose exec -T users python -m pytest "project/tests" -p no:warnings --cov="project"
+      - docker-compose exec -T users flake8 --ignore=E501,F401 project
+      - docker-compose exec -T users black project --check
+      - docker-compose exec -T users /bin/sh -c "isort project/*/*.py --check-only"
+      - echo building prod images...
+      - >
+        docker build \
+          --target builder \
+          --cache-from $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:builder \
+          -f services/web/Dockerfile.prod \
+          -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:builder \
+          --build-arg NODE_ENV=production
+      - >
+        docker build \
+          --cache-from $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod \
+          -f services/web/Dockerfile.prod \
+          -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod \
+          ./services/web
+  post_build:
+    commands:
+      - echo pushing prod images to ecr...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flaskt:builder
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod

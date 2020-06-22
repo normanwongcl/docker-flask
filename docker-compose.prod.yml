@@ -24,10 +24,12 @@ services:
     build: ./services/nginx
     volumes:
       - static_volume:/home/app/web/project/static
+      - media_volume:/home/app/web/project/media
     ports:
-      - 1337:80
+      - 8080:80
     depends_on:
       - web
 volumes:
   postgres_data:
   static_volume:
+  media_volume:
