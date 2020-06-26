@@ -10,6 +10,7 @@ services:
     environment:
       - FLASK_APP=project/__init__.py
       - FLASK_ENV=development
+      - DEBUG=1
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgresql://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgresql://postgres:postgres@users-db:5432/users_test
@@ -23,4 +24,3 @@ services:
       - 5432
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres

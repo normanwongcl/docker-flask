@@ -1,16 +1,11 @@
 #!/bin/sh
 
-set -e
+echo "Waiting for postgres..."
 
-if [ "$DATABASE" = "postgres" ]
-then
-    echo "Waiting for postgres..."
+while ! nc -z db 5432; do
+  sleep 0.1
+done
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
-      sleep 0.1
-    done
+echo "PostgreSQL started"
 
-    echo "PostgreSQL started"
-fi
-
-exec "$@"
+gunicorn -b 0.0.0.0:5000 manage:app
