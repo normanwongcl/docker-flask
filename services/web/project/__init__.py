@@ -5,8 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-# Pull in config to init
-app.config.from_object("project.config.Config")
+
+# set config
+app_settings = os.getenv("APP_SETTINGS")
+app.config.from_object(app_settings)
+
 # Create a new SQLAlchemy instance
 db = SQLAlchemy(app)
 

@@ -7,8 +7,12 @@ services:
       dockerfile: Dockerfile.prod
     expose:
       - 5000
-    env_file:
-      - ./.env.prod
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.ProductionConfig
+      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_prod
+      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - SECRET_KEY=my_precious
     command: gunicorn --bind 0.0.0.0:5000 manage:app
     volumes:
       - static_volume:/home/app/web/project/static
@@ -30,6 +34,5 @@ services:
     depends_on:
       - web
 volumes:
-  postgres_data:
   static_volume:
   media_volume:
