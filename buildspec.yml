@@ -34,7 +34,7 @@ phases:
           --cache-from $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod \
           -f services/web/Dockerfile.prod \
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod \
-          ./services/web --build-arg POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+          ./services/web
   post_build:
     commands:
       - echo pushing prod images to ecr...
