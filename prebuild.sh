@@ -16,3 +16,5 @@ fi
 echo  Docker tag: "$DOCKER_TAG"
 
 docker pull "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/docker-flask:"$DOCKER_TAG" || true
+
+export DOCKER_TAG=$DOCKER_TAG
