@@ -12,7 +12,7 @@ phases:
     commands:
       - echo logging in to ecr...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
-      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/docker-flask:prod || true
+      - docker pull "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/docker-flask:prod || true
   build:
     commands:
       - bash build.sh
