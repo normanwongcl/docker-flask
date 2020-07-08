@@ -7,7 +7,7 @@ Teaching myself how to work with flask project.
 # Demo
 
 <h2 align="center">
-  <img src="https://github.com/normanwongcl/https://github.com/normanwongcl/docker-flask/blob/master/demo/demo.gif" alt="Docker Flask Demo GIF" width="600px" />
+  <img src="https://github.com/normanwongcl/docker-flask/blob/master/demo/demo.gif" alt="Docker Flask Demo GIF" width="600px" />
   <br>
 </h2>
 
