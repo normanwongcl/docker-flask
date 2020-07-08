@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-TAG_NAME="$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/docker-flask:prod
+TAG_NAME="$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/docker-flask:$DOCKER_TAG
 
 echo building and testing dev images...
 
