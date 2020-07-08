@@ -1,10 +1,9 @@
 import os
 
-APP_NAME = "flask-react-spa"
+APP_NAME = "docker-flask"
 
 
 class BaseConfig:
-    FLASK_APP = f"{os.getenv('APP_FOLDER')}/project/__init__.py"
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
