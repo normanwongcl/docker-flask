@@ -2,7 +2,7 @@
 
 # Dockerizing flask, postgres, nginx
 
-Teaching myself how to work with flask project.
+Teaching myself how to work with the python ecosystem by working with Python Flask Framework.
 
 # Demo
 
